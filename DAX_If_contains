@@ -1,0 +1,1 @@
+IF(CONTAINS(tidserie, tidserie[statistikkvariabel], "Historisk"), IF(HASONEVALUE(tidserie[statistikkvariabel]), "historiske tall", "historiske tall og framskriving fra ssb"), "framskriving fra ssb")
