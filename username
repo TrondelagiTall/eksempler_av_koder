@@ -1,0 +1,9 @@
+let
+    Source = Folder.Contents("C:\Users\"),
+    #"Expanded Attributes" = Table.ExpandRecordColumn(Source, "Attributes", {"Hidden", "Directory", "ChangeTime"}, {"Hidden", "Directory", "ChangeTime"}),
+    #"Filtered Directories not hidden" = Table.SelectRows(#"Expanded Attributes", each ([Directory] = true) and ([Hidden] = false)),
+    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Filtered Directories not hidden", {"ChangeTime"}),
+    #"Filtered Rows" = Table.SelectRows(#"Removed Errors", each ([Name] <> "Public")),
+    #"Username" = #"Filtered Rows"{0}[Name]
+in
+    #"Username"
